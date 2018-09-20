@@ -1,0 +1,46 @@
+body {
+    background-image: url(../img/moundbackground.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+.character {
+    float: right;
+    position: relative;
+    top: 15px;
+}
+.clearfix {
+    overflow: auto;
+}
+.inplay {
+    margin: auto;
+    padding: 10px 20px;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+    left: 128px;
+    top: 15px;
+}
+#patty, #schroeder, #lucy, #franklin {
+    padding: 0 18px;
+    margin: auto;
+}
+
+.drawdeck, .drawpile {
+    position: relative;
+    top: 12px;
+    padding: 0 10px;
+}
+
+.peanuts {
+    padding: 30px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+}
+.woodstock {
+    padding: 30px;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+
+}
