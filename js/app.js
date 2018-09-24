@@ -1,3 +1,88 @@
+/*----- constants -----*/
+
+const SUITS = ["D", "C", "H", "S"];
+const RANKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+
+
+/*----- app's state (variables) -----*/
+var deck; 
+var tableau; // 7 distribution columns
+var foundation; // The unloading decks
+
+var stock;
+var waste;
+
+/*----- cached element references -----*/
+
+// This is the cached area to reference the items called on in the DOM
+
+// var tableau = document.getElementById("tableau"); // set up a tableau
+// var foundation = document.getElementById("foundation"); // set up the cards as foundations
+// var waste = document.getElementById("waste"); // the drawn cards
+// var stock = document.getElementById("stock"); // the undrawn cards
+
+/*----- event listeners -----*/
+
+// waste/stock event listeners
+// tableau movement
+// active play motion?
+// click to start deck & RESTART BUTTON
+
+/*----- functions -----*/
+
+
+
+//function for initializing the game - empty arrays and initializing the functions
+function init() {
+    deck = [];
+    activeCard = []; // this is where the active card in play is stored
+    stock = [];
+    waste = [];
+    tableau = [[], [], [], [], [], [], []];
+    foundation = [[], [], [], []];
+    createDeck(); // function making the card array correspond with the images
+    //shuffleDeck(); // function to shuffle deck
+    //createTableau(); // this method will deal cards into the correct columns
+    //render(); // render will invoke the state of the game
+   // displayActive(); // show active cards function?
+  }
+
+
+class Card {
+    constructor(suit, rank) {
+        this.suit = suit;
+        this.rank = rank;
+        // card is active? 
+        this.imgLink = (`../img/${this.suit}${this.rank}.png`)
+    }
+}
+
+function createDeck () {
+    for(var s = 0; s < SUITS.length; s++) {
+        for (var r = 0; r < RANKS.length; r++) {
+            deck.push(new Card( SUITS[s], RANKS[r]));
+            // iterate throught the array
+        }
+    }
+}
+
+function shuffleDeck() {
+    for (var i = 0; i < 52; i++) {
+      var randI = Math.floor(Math.random() * deck.length);
+      stock.push(deck[randI]);
+      deck.splice(randI, 1);
+    }
+    return stock;
+  }
+
+init();
+
+
+// columns should be constructors and loading decks are in arrays
+
+
+
+
 // Start Game
 
 // Create storage of cards (shuffle)
@@ -29,50 +114,3 @@
 
 
 // How do transition cards and create valid input areas?
-
-/*----- constants -----*/
-// Value never changes, the cards retain meaning
-var suit = ["spades", "hearts", "clubs", "diamonds"];
-var rank = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-// actual corresponding rank = [A, 2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K];
-
-
-/*----- app's state (variables) -----*/
-var deck; // All cards
-var tableau; // 7 distribution columns
-var foundation; // The Unloading decks
-
-var stock; // the waste/stock/draw ??
-var waste;
-
-/*----- cached element references -----*/
-
-// This is the cached area to reference the items called on in the DOM...
-
-var tableauEl = document.getElementById("tableau"); // set up a tableau
-var foundationEl = document.getElementById("foundation"); // set up the cards as foundations
-var wasteEl = document.getElementById("waste"); // the drawn cards
-var stockEl = document.getElementById("stock"); // the undrawn cards
-
-/*----- event listeners -----*/
-
-
-
-
-/*----- functions -----*/
-
-//function for initializing the game
-//everything at zero
-function init() {
-    deck = [];
-    activeCard = []; // this is where the active card in play is stored
-    stock = [];
-    waste = [];
-    tableau = [[], [], [], [], [], [], []];
-    foundation = [[], [], [], []];
-    makeDeck(); // function making the card array correspond with the images
-    shuffleDeck(); // function to shuffle deck
-    makeTableau(); // this method will place the cards in the correct column
-    render(); // render will invoke the state of the game
-   // displayActive(); // do I need a way to show my player is active?
-  }

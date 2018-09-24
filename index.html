@@ -5,33 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/app.js" defer></script>
     <title>Solitaire</title>
 </head>
 <body>
-    <div>
-        <img class="drawdeck" src="img/back_3.png">
-        <img class="drawpile" src="img/8SB.png">
-        <img class="character" id="lucy" src="img/lucy.png">
-        <img class="character" id="franklin" src="img/franklin.png">
-        <img class="character" id="schroeder" src="img/schroeder.png">
-        <img class="character" id="patty" src="img/patty.png">
+    <div class="topRow">
+        <span id="stock">
+        <img src="img/back_3.png">
+        </span>
+        <span id="waste">
+        <img src="img/S1.png">
+        </span>
+        <span id="foundation">
+        <span class="foundation" id="clubLoading"><img src="img/franklin.png"></span>
+        <span class="foundation" id="diamondLoading"><img src="img/lucy.png"></span>
+        <span class="foundation" id="spadeLoading"><img src="img/schroeder.png"></span>
+        <span class="foundation" id="heartLoading"><img src="img/patty.png"></span>
+        </span>
     </div>
-    <div class="packinplay">
-        
-        <img class="inplay" src="img/4DR.png">
-        <img class="inplay" src="img/1stack.png">
-        <img class="inplay" src="img/2stack.png">
-        <img class="inplay" src="img/3stack.png">
-        <img class="inplay" src="img/4stack.png">
-        <img class="inplay" src="img/5stack.png">
-        <img class="inplay" src="img/6stack.png">
-            
+
+    <div id="tableau">
+        <span id="column0" class="tableau"><img src="img/S8.png"></span>
+        <span id="column1" class="tableau"><img src="img/1stack.png"></span>
+        <span id="column2" class="tableau"><img src="img/1stack.png"></span>
+        <span id="column3" class="tableau"><img src="img/1stack.png"></span>
+        <span id="column4" class="tableau"><img src="img/1stack.png"></span>
+        <span id="column5" class="tableau"><img src="img/1stack.png"></span>
+        <span id="column6" class="tableau"><img src="img/1stack.png"></span>
     </div>
     <div>
         <img class="peanuts" src="img/peanuts.png">
         <img class="woodstock" src="img/woodstock.png">
         <button>RESET</button>
-        
     </div>
 </body>
 </html>
