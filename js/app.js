@@ -16,10 +16,10 @@ var waste;
 
 // This is the cached area to reference the items called on in the DOM
 
-// var tableau = document.getElementById("tableau"); // set up a tableau
-// var foundation = document.getElementById("foundation"); // set up the cards as foundations
-// var waste = document.getElementById("waste"); // the drawn cards
-// var stock = document.getElementById("stock"); // the undrawn cards
+var tableau = document.getElementById("tableau"); // set up a tableau
+var foundation = document.getElementById("foundation"); // set up the cards as foundations
+var waste = document.getElementById("waste"); // the drawn cards
+var stock = document.getElementById("stock"); // the undrawn cards
 
 /*----- event listeners -----*/
 
@@ -41,7 +41,7 @@ function init() {
     tableau = [[], [], [], [], [], [], []];
     foundation = [[], [], [], []];
     createDeck(); // function making the card array correspond with the images
-    //shuffleDeck(); // function to shuffle deck
+    shuffleDeck(); // function to shuffle deck
     //createTableau(); // this method will deal cards into the correct columns
     //render(); // render will invoke the state of the game
    // displayActive(); // show active cards function?
@@ -72,10 +72,23 @@ function shuffleDeck() {
       stock.push(deck[randI]);
       deck.splice(randI, 1);
     }
-    return stock;
-  }
+}
+
+
+// function makeTableau() {
+//     for (t in tableau) { //variable in an object...
+//       while (tableau[t].length <= t) {
+//         tableau[t].push(stock.pop());
+//       }
+//     //   tableau[t][t].isActive = true;
+//     // }
+// }
+
+
 
 init();
+
+
 
 
 // columns should be constructors and loading decks are in arrays
