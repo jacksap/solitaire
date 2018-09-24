@@ -16,10 +16,10 @@ var waste;
 
 // This is the cached area to reference the items called on in the DOM
 
-var tableau = document.getElementById("tableau"); // set up a tableau
-var foundation = document.getElementById("foundation"); // set up the cards as foundations
-var waste = document.getElementById("waste"); // the drawn cards
-var stock = document.getElementById("stock"); // the undrawn cards
+var tableau = document.getElementById("tableau");
+var foundation = document.getElementById("foundation");
+var waste = document.getElementById("waste"); 
+var stock = document.getElementById("stock"); 
 
 /*----- event listeners -----*/
 
@@ -30,9 +30,6 @@ var stock = document.getElementById("stock"); // the undrawn cards
 
 /*----- functions -----*/
 
-
-
-//function for initializing the game - empty arrays and initializing the functions
 function init() {
     deck = [];
     activeCard = []; // this is where the active card in play is stored
@@ -41,10 +38,10 @@ function init() {
     tableau = [[], [], [], [], [], [], []];
     foundation = [[], [], [], []];
     createDeck(); // function making the card array correspond with the images
-    shuffleDeck(); // function to shuffle deck
-    //createTableau(); // this method will deal cards into the correct columns
-    //render(); // render will invoke the state of the game
-   // displayActive(); // show active cards function?
+    // shuffleDeck(); // function to shuffle deck
+    // stageTableau(); // this method will deal cards into the correct columns
+    // render(); // render will invoke the state of the game
+    // displayActive(); // show active cards function?
   }
 
 
@@ -52,43 +49,37 @@ class Card {
     constructor(suit, rank) {
         this.suit = suit;
         this.rank = rank;
-        // card is active? 
+        this.isActive = false;
         this.imgLink = (`../img/${this.suit}${this.rank}.png`)
     }
 }
-
-function createDeck () {
-    for(var s = 0; s < SUITS.length; s++) {
-        for (var r = 0; r < RANKS.length; r++) {
-            deck.push(new Card( SUITS[s], RANKS[r]));
-            // iterate throught the array
-        }
-    }
-}
-
 function shuffleDeck() {
     for (var i = 0; i < 52; i++) {
       var randI = Math.floor(Math.random() * deck.length);
       stock.push(deck[randI]);
       deck.splice(randI, 1);
     }
+    return stock;
 }
-
-
-// function makeTableau() {
-//     for (t in tableau) { //variable in an object...
+// function stageTableau() {
+//     for (t in tableau) {
 //       while (tableau[t].length <= t) {
 //         tableau[t].push(stock.pop());
 //       }
-//     //   tableau[t][t].isActive = true;
-//     // }
+//       tableau[t][t].isActive = true;
+//     }
 // }
 
+function createDeck () {
+    for(var s = 0; s < SUITS.length; s++) {
+        for (var r = 0; r < RANKS.length; r++) {
+            deck.push(new Card( SUITS[s], RANKS[r]));
+        }
+    }
+}
 
 
 init();
-
-
 
 
 // columns should be constructors and loading decks are in arrays

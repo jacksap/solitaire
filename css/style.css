@@ -1,5 +1,5 @@
 body {
-    background-image: url(../img/mound.png);
+    background-image: url(../img/moonpumpkin.jpg);
     background-size: cover;
     background-attachment: fixed;
 }
@@ -52,10 +52,10 @@ button {
     font-weight: bold;
     font-size: 1em;
     width: 120px;
-    background-color: #ffde18;
+    background-color: #ecf0a7;
     border-color: black;
     border-width: medium;
     position: absolute;
-    right: 50px;
-    bottom: 60px;
+    right: 40px;
+    bottom: 40px;
 }
