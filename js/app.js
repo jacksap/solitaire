@@ -11,6 +11,7 @@ var foundation; // The unloading decks
 
 var stock;
 var waste;
+var tableauSections;
 
 /*----- cached element references -----*/
 
@@ -46,21 +47,31 @@ function init() {
 }
 
 function render() {
-    var verticalStack = tableauEl.children;
-    // var i = 0; do I need a identifying value for this column defining the value or something -- image wise...
+    var tableauSections = tableauEl.children;
+    var i = 0; // do I need a identifying value for this column defining the value or something -- image wise...
     for (col in tableau) {
-        while(verticalStack[col].firstChild){
-            verticalStack[col].removeChild(verticalStack[col].firstChild);
+        while(tableauSections[col].firstChild){
+            tableauSections[col].removeChild(tableauSections[col].firstChild);
         }
-        //var i = 0; again... do I need a identifying value for this column defining the value or something -- image wise
+        var idx = 0; // again... do I need a identifying value for this column defining the value or something -- image wise
         for (card in tableau[col]) {
             if (tableau[col][card].isActive) {
-                verticalStack[col].innerHTML = `${verticalStack[col].innerHTML}<div><img src="$[this.suit]$[this.rank]"></div>`;
-
+                tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/$[this.suit]$[this.rank].png"></div>`;
+                tableauSections[col].lastChild.style.backgroundImage =
+                "url(" + tableau[col][card].imgLink + ")"; //how do I define this?
+            } else {
+            tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/REDBACK.png"></div>`;
+                tChildren[col].lastChild.setAttribute(//"style",;"
+                );
             }
+        idx++;
         }
-    }
+    i++;
 }
+}
+// }
+// }
+// }
 
 class Card {
     constructor(suit, rank) {
