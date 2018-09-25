@@ -17,7 +17,7 @@ var tableauSections;
 
 // This is the cached area to reference the items called on in the DOM
 
-var tableauEl = document.getElementById("tableau");
+var tableauCols = document.querySelectorAll("#tableau section");
 var foundationEl = document.getElementById("foundation");
 var wasteEl = document.getElementById("waste"); 
 var stockEl = document.getElementById("stock"); 
@@ -26,7 +26,7 @@ var stockEl = document.getElementById("stock");
 
 // waste/stock event listeners
 // tableau movement
-tableauEl.addEventListener("dragenter", addTableau);
+// tableauEl.addEventListener('dragenter', addTableau); //dragover? maybe?
 // active play motion?
 // click to start deck & RESTART BUTTON
 
@@ -39,36 +39,25 @@ function init() {
     waste = [];
     tableau = [[], [], [], [], [], [], []];
     foundation = [[], [], [], []];
-    // deal();
     createDeck(); // function making the card array correspond with the images
     shuffleDeck(); // function to shuffle deck
+    deal();
     // stageTableau(); // this method will deal cards into the correct columns
     render(); // render will invoke the state of the game
     // displayActive(); // show active cards function?
 }
 
 function render() {
-    var tableauSections = tableauEl.children;
-    var i = 0; // do I need a identifying value for this column -- image wise...
-    for (col in tableau) {
-        while(tableauSections[col].firstChild){
-            tableauSections[col].removeChild(tableauSections[col].firstChild);
-        }
-        var idx = 0; // again... -- identifying an iterator?
-        for (card in tableau[col]) {
-            if (tableau[col][card].isActive) {
-                tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/$[this.suit]$[this.rank].png"></div>`;
-                tableauSections[col].lastChild.style.backgroundImage =
-                "url(" + tableau[col][card].imgLink + ")"; //how do I define this - what style am I trying to alter?
-            } else {
-                tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/REDBACK.png"></div>`;
-                tableauSections[col].lastChild.setAttribute(//"style",;"how do I define this...
-            );
-            }
-        idx++;
-        }
-    i++;
-}
+    tableauCols.forEach(function(section, tableauColIdx) {
+        // build string of divs to set to section's innerHTML
+        // debugger;
+        var html = '';
+        tableau[tableauColIdx].forEach(function(card) {
+            html += `<div><img src="${card.isActive ? card.imgLink : 'img/REDBACK.png'}"></div>`;
+        });
+        section.innerHTML = html;
+    });
+
 }
 
 // Keep in mind the function above will handle other data.
@@ -78,6 +67,7 @@ class Card {
         this.suit = suit;
         this.rank = rank;
         this.isActive = false;
+        // this.selected = false;
         this.imgLink = (`../img/${this.suit}${this.rank}.png`)
     }
 }
@@ -88,28 +78,34 @@ function shuffleDeck() {
       deck.splice(randShuffle, 1);
     }
     return stock;
+}
+
+function deal() {
     tableau.forEach(function(colArr,colIdx){ 
         for(var i = 0; i <= colIdx; i++) {
-            colArr.push(stock.pop);
+            colArr.push(stock.pop());
             if (i === colIdx) colArr[i].isActive = true;
-        } // when the constructor ran - it then started the fE function
-    });    
+        }
+    }); 
+    // rest goes into a stock pile
 }
 
 function addTableau(e) {
     if (activeCard.length) {
       var tableauTarget = tableau[e.target.id.charAt(0)];
-      if (activeCard[0].rank === 13 && tableauTarget.length === 0) {
-        while (activeCard.length > 0) {
+      if (activeCard[0].rank === 13 && tableauTarget.length === 0) { // the K card on an empty array
+        while (activeCard.length > 0) { // If the array length in the column is larger than 0
             tableauTarget.push(activeCard.shift()); //front of the array (display wise...)
         }
       } else {
-        var identifySuit = suit.indexOf(activeCard[0].suit) %2 !== suit.indexOf(tableauTarget[tableauTarget.length - 1].suit) % 2;
+        var identifySuit = suit.indexOf(activeCard[0].suit) %2 !== suit.indexOf(tableauTarget[tableauTarget.length - 1].suit) % 2; 
+        // I think this works because I alternate between red and black...
         var identifyRank = activeCard[0].rank + 1 === tableauTarget[tableauTarget.length - 1].rank;
+        // checking that the var is identical to what will come next
         if (identifyRank && identifySuit) {
-            console.log(identifyRank, identifySuit);
+            console.log(identifyRank, identifySuit); // temporary console log check
         while (activeCard.length > 0) {
-            tableauTarget.push(activeCard.shift());
+            tableauTarget.push(activeCard.shift()); // take from end and transition to front of activeCard array...
         }
         } else {
           console.log("Error adding to the Tableau.");
@@ -127,6 +123,19 @@ function createDeck () {
         }
     }
 }
+
+// USE THIS AS A RESET MODEL
+
+// function reset(event) {
+//     Card.isActive = false;
+//     // How I will be stating that nothing is in play anymore. I really want to the init to be set off.
+//     AKA When the button is clicked, clear board again...
+//     for (let i = 0; i < colArray.length; i++) {
+//         colArray[i].src = "img/REDBACK.png"; // unclear if this will work, has to be built out.
+//         init();
+//     }
+// }
+
 
 init();
 

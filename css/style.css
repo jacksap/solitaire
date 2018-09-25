@@ -3,6 +3,7 @@ body {
     background-size: cover;
     background-attachment: fixed;
 }
+
 #foundation {
     float: right;
     position: relative;
@@ -15,11 +16,18 @@ body {
     margin: auto;
     width: 100vw;
 }
-#tableau{
+#tableau {
+    display: flex;
     vertical-align: top;
-    padding: 20px 20px;
-    text-align: center;
+    margin: 20px 20px;
 }
+
+#tableau section {
+    min-width: 100px;
+    min-height: 200px;
+    border: 1px dashed red;
+}
+
 .foundation {
     padding: 0 18px;
     margin: auto;
