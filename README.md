@@ -1,6 +1,6 @@
 # Solitaire
 <!-- A description of your game. Background info of the game is a nice touch. -->
-Solitaire is a popular card game.
+Solitaire is a popular card game...
 
 <!-- A screenshot or screenshots of your actual game makes your readme more colorful :) -->
 

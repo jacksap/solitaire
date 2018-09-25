@@ -18,7 +18,7 @@ var tableauSections;
 // This is the cached area to reference the items called on in the DOM
 
 var tableauCols = document.querySelectorAll("#tableau section");
-var foundationEl = document.querySelectorAll("#foundation div");
+var foundationPiles = document.querySelectorAll("#foundation div");
 var wasteEl = document.getElementById("waste"); 
 var stockEl = document.getElementById("stock"); 
 
@@ -27,6 +27,7 @@ var stockEl = document.getElementById("stock");
 // waste/stock event listeners
 // tableau movement
 // tableauEl.addEventListener('dragenter', addTableau); //dragover? maybe?
+// wasteEl.addEventListener("click", selectWaste);
 // active play motion?
 // click to start deck & RESTART BUTTON
 
@@ -41,8 +42,7 @@ function init() {
     foundation = [[], [], [], []];
     createDeck(); // function making the card array correspond with the images
     shuffleDeck(); // function to shuffle deck
-    deal();
-    // stageTableau(); // this method will deal cards into the correct columns
+    deal(); // Can this put the remainder of stock into the stock pile? Element?
     render(); // render will invoke the state of the game
     // displayActive(); // show active cards function?
 }
@@ -50,21 +50,32 @@ function init() {
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
         // build string of divs to set to section's innerHTML
-        // debugger;
         var html = '';
         tableau[tableauColIdx].forEach(function(card) {
             html += `<div><img src="${card.isActive ? card.imgLink : 'img/REDBACK.png'}"></div>`;
         });
         section.innerHTML = html;
     });
-    foundationEl.forEach(function(div, foundationElidx) {
-        var fPlaceholder = '';
-        foundation[foundationElidx].forEach(function(card){
-            fPlaceholder += `<img src="${card.isActive ? card.imgLink : 'img/franklin.png'}">`  
+    foundationPiles.forEach(function(div,foundationPileIdx) {
+        var html = '';
+        foundation[foundationPileIdx].forEach(function(card) {
+            html += `<img src="${card.isActive ? card.imgLink : 'img/franklin.png'}">`; // do I want card in here at all?
         });
-        div.innerHTML = fPlaceholder;
+        div.innerHTML = html;
     });
+    if (!stock.length) {
+        stockEl.setAttribute("style","background-color: white;");
+    } else {
+        stockEl.setAttribute("style","background-image:url('img/REDBACK.png');");
+    }
+    // wasteEl.forEach(function(,){
 
+    // })
+
+
+
+
+    checkWin();
 }
 
 // Keep in mind the function above will handle other data.
@@ -74,7 +85,7 @@ class Card {
         this.suit = suit;
         this.rank = rank;
         this.isActive = false;
-        // this.selected = false;
+        this.selected = false;
         this.imgLink = (`../img/${this.suit}${this.rank}.png`)
     }
 }
@@ -92,36 +103,9 @@ function deal() {
         for(var i = 0; i <= colIdx; i++) {
             colArr.push(stock.pop());
             if (i === colIdx) colArr[i].isActive = true;
-        }
+        } 
     }); 
-    // rest goes into a stock pile
 }
-
-// function addTableau(e) {
-//     if (activeCard.length) {
-//       var tableauTarget = tableau[e.target.id.charAt(0)];
-//       if (activeCard[0].rank === 13 && tableauTarget.length === 0) { // the K card on an empty array
-//         while (activeCard.length > 0) { // If the array length in the column is larger than 0
-//             tableauTarget.push(activeCard.shift()); //front of the array (display wise...)
-//         }
-//       } else {
-//         var identifySuit = suit.indexOf(activeCard[0].suit) %2 !== suit.indexOf(tableauTarget[tableauTarget.length - 1].suit) % 2; 
-//         // I think this works because I alternate between red and black...
-//         var identifyRank = activeCard[0].rank + 1 === tableauTarget[tableauTarget.length - 1].rank;
-//         // checking that the var is identical to what will come next
-//         if (identifyRank && identifySuit) {
-//             console.log(identifyRank, identifySuit); // temporary console log check
-//         while (activeCard.length > 0) {
-//             tableauTarget.push(activeCard.shift()); // take from end and transition to front of activeCard array...
-//         }
-//         } else {
-//           console.log("Error adding to the Tableau.");
-//         }
-//       }
-//       render();
-//       //displayActive(e);
-//     }
-// }
 
 function createDeck () {
     for(var s = 0; s < SUITS.length; s++) {
@@ -131,11 +115,12 @@ function createDeck () {
     }
 }
 
-function chkWin() {
+
+
+function checkWin() {
     if (foundation[0].length + foundation[1].length + foundation[2].length + foundation[3].length === 52)
-    //   DO SOMETHING ON THE BOARD
-    ;
-    }
+    /*{DO SOMETHING ON THE BOARD}*/;
+}
 
 // USE THIS AS A RESET MODEL
 
@@ -149,6 +134,18 @@ function chkWin() {
 //     }
 // }
 
+// function addWaste(e) {
+//     if (!activeCard.length) {
+//       if (stock.length === 0) {
+//         stock = stock.concat(waste.reverse());
+//         waste = [];
+//       } else {
+//         waste = waste.concat(stock.splice(stock.length - 3).reverse());
+//       }
+//     }
+//     displayActive(e);
+//     render();
+//   }
 
 init();
 
