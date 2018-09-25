@@ -5,13 +5,14 @@ body {
 }
 
 #foundation {
-    float: right;
-    position: relative;
-    top: 15px;
+    display:flex;
 }
-.clearfix {
-    overflow: auto;
+#foundation div {
+    min-width: 100px;
+    min-height: 140px;
+    border: 1px dashed salmon;
 }
+
 .tableau {
     margin: auto;
     width: 100vw;
@@ -20,15 +21,16 @@ body {
     display: flex;
     vertical-align: top;
     margin: 20px 20px;
+    justify-content: center;
 }
 
 #tableau section {
     min-width: 100px;
-    min-height: 200px;
+    min-height: 140px;
     border: 1px dashed red;
 }
 
-.foundation {
+#foundation {
     padding: 0 18px;
     margin: auto;
 }
