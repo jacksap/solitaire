@@ -26,6 +26,7 @@ var stockEl = document.getElementById("stock");
 
 // waste/stock event listeners
 // tableau movement
+tableauEl.addEventListener("dragenter", addTableau);
 // active play motion?
 // click to start deck & RESTART BUTTON
 
@@ -40,7 +41,7 @@ function init() {
     foundation = [[], [], [], []];
     // deal();
     createDeck(); // function making the card array correspond with the images
-    // shuffleDeck(); // function to shuffle deck
+    shuffleDeck(); // function to shuffle deck
     // stageTableau(); // this method will deal cards into the correct columns
     render(); // render will invoke the state of the game
     // displayActive(); // show active cards function?
@@ -48,30 +49,29 @@ function init() {
 
 function render() {
     var tableauSections = tableauEl.children;
-    var i = 0; // do I need a identifying value for this column defining the value or something -- image wise...
+    var i = 0; // do I need a identifying value for this column -- image wise...
     for (col in tableau) {
         while(tableauSections[col].firstChild){
             tableauSections[col].removeChild(tableauSections[col].firstChild);
         }
-        var idx = 0; // again... do I need a identifying value for this column defining the value or something -- image wise
+        var idx = 0; // again... -- identifying an iterator?
         for (card in tableau[col]) {
             if (tableau[col][card].isActive) {
                 tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/$[this.suit]$[this.rank].png"></div>`;
                 tableauSections[col].lastChild.style.backgroundImage =
-                "url(" + tableau[col][card].imgLink + ")"; //how do I define this?
+                "url(" + tableau[col][card].imgLink + ")"; //how do I define this - what style am I trying to alter?
             } else {
-            tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/REDBACK.png"></div>`;
-                tChildren[col].lastChild.setAttribute(//"style",;"
-                );
+                tableauSections[col].innerHTML = `${tableauSections[col].innerHTML}<div><img src="img/REDBACK.png"></div>`;
+                tableauSections[col].lastChild.setAttribute(//"style",;"how do I define this...
+            );
             }
         idx++;
         }
     i++;
 }
 }
-// }
-// }
-// }
+
+// Keep in mind the function above will handle other data.
 
 class Card {
     constructor(suit, rank) {
@@ -94,6 +94,30 @@ function shuffleDeck() {
             if (i === colIdx) colArr[i].isActive = true;
         } // when the constructor ran - it then started the fE function
     });    
+}
+
+function addTableau(e) {
+    if (activeCard.length) {
+      var tableauTarget = tableau[e.target.id.charAt(0)];
+      if (activeCard[0].rank === 13 && tableauTarget.length === 0) {
+        while (activeCard.length > 0) {
+            tableauTarget.push(activeCard.shift()); //front of the array (display wise...)
+        }
+      } else {
+        var identifySuit = suit.indexOf(activeCard[0].suit) %2 !== suit.indexOf(tableauTarget[tableauTarget.length - 1].suit) % 2;
+        var identifyRank = activeCard[0].rank + 1 === tableauTarget[tableauTarget.length - 1].rank;
+        if (identifyRank && identifySuit) {
+            console.log(identifyRank, identifySuit);
+        while (activeCard.length > 0) {
+            tableauTarget.push(activeCard.shift());
+        }
+        } else {
+          console.log("Error adding to the Tableau.");
+        }
+      }
+      render();
+      //displayActive(e);
+    }
 }
 
 function createDeck () {
