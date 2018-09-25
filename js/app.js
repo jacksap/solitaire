@@ -2,7 +2,7 @@
 
 const SUITS = ["D", "C", "H", "S"];
 const RANKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-
+const CARDBACK = `path`
 
 /*----- app's state (variables) -----*/
 var deck; 
@@ -16,10 +16,10 @@ var waste;
 
 // This is the cached area to reference the items called on in the DOM
 
-var tableau = document.getElementById("tableau");
-var foundation = document.getElementById("foundation");
-var waste = document.getElementById("waste"); 
-var stock = document.getElementById("stock"); 
+var tableauEl = document.getElementById("tableau");
+var foundationEl = document.getElementById("foundation");
+var wasteEl = document.getElementById("waste"); 
+var stockEl = document.getElementById("stock"); 
 
 /*----- event listeners -----*/
 
@@ -37,13 +37,20 @@ function init() {
     waste = [];
     tableau = [[], [], [], [], [], [], []];
     foundation = [[], [], [], []];
+    // deal();
     createDeck(); // function making the card array correspond with the images
     // shuffleDeck(); // function to shuffle deck
     // stageTableau(); // this method will deal cards into the correct columns
     // render(); // render will invoke the state of the game
     // displayActive(); // show active cards function?
-  }
+}
 
+tableau.forEach(function(colArr,colIdx){ 
+    for(var i = 0; i <= colIdx; i++) {
+        colArr.push(stock.pop);
+        if (i === colIdx) colArr[i].isActive = true;
+    }
+});
 
 class Card {
     constructor(suit, rank) {
@@ -55,20 +62,12 @@ class Card {
 }
 function shuffleDeck() {
     for (var i = 0; i < 52; i++) {
-      var randI = Math.floor(Math.random() * deck.length);
-      stock.push(deck[randI]);
-      deck.splice(randI, 1);
+      var randShuffle = Math.floor(Math.random() * deck.length);
+      stock.push(deck[randShuffle]);
+      deck.splice(randShuffle, 1);
     }
     return stock;
 }
-// function stageTableau() {
-//     for (t in tableau) {
-//       while (tableau[t].length <= t) {
-//         tableau[t].push(stock.pop());
-//       }
-//       tableau[t][t].isActive = true;
-//     }
-// }
 
 function createDeck () {
     for(var s = 0; s < SUITS.length; s++) {
@@ -77,7 +76,6 @@ function createDeck () {
         }
     }
 }
-
 
 init();
 
