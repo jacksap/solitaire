@@ -41,16 +41,26 @@ function init() {
     createDeck(); // function making the card array correspond with the images
     // shuffleDeck(); // function to shuffle deck
     // stageTableau(); // this method will deal cards into the correct columns
-    // render(); // render will invoke the state of the game
+    render(); // render will invoke the state of the game
     // displayActive(); // show active cards function?
 }
 
-tableau.forEach(function(colArr,colIdx){ 
-    for(var i = 0; i <= colIdx; i++) {
-        colArr.push(stock.pop);
-        if (i === colIdx) colArr[i].isActive = true;
+function render() {
+    var verticalStack = tableauEl.children;
+    // var i = 0; do I need a identifying value for this column defining the value or something -- image wise...
+    for (col in tableau) {
+        while(verticalStack[col].firstChild){
+            verticalStack[col].removeChild(verticalStack[col].firstChild);
+        }
+        //var i = 0; again... do I need a identifying value for this column defining the value or something -- image wise
+        for (card in tableau[col]) {
+            if (tableau[col][card].isActive) {
+                verticalStack[col].innerHTML = `${verticalStack[col].innerHTML}<div><img src="$[this.suit]$[this.rank]"></div>`;
+
+            }
+        }
     }
-});
+}
 
 class Card {
     constructor(suit, rank) {
@@ -67,6 +77,12 @@ function shuffleDeck() {
       deck.splice(randShuffle, 1);
     }
     return stock;
+    tableau.forEach(function(colArr,colIdx){ 
+        for(var i = 0; i <= colIdx; i++) {
+            colArr.push(stock.pop);
+            if (i === colIdx) colArr[i].isActive = true;
+        } // when the constructor ran - it then started the fE function
+    });    
 }
 
 function createDeck () {
