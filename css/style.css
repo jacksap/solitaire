@@ -6,6 +6,8 @@ body {
 
 #foundation {
     display:flex;
+    position: relative;
+    left: 15%;
 }
 #foundation div {
     min-width: 100px;
@@ -35,7 +37,7 @@ body {
     margin: auto;
 }
 
-#stock, #waste {
+#stock, #waste, #foundation {
     position: relative;
     top: 12px;
     padding: 0 10px;
@@ -82,7 +84,7 @@ button {
     min-height: 140px;
     border: 1px dashed limegreen;
     display: inline-flex;
-    /* position: fixed; */
+    position: fixed;
     box-sizing: content-box;
     background-repeat: no-repeat;
     position: relative;
@@ -93,8 +95,25 @@ button {
     min-height: 140px;
     border: 1px dashed magenta;
     display: inline-flex;
-    /* position: fixed; */
+    position: fixed;
     box-sizing: content-box;
     position: relative;
     left: 7%;
+}
+
+#d {
+    background-image: url('../img/lucy.png');
+    background-repeat: no-repeat;
+}
+#c {
+    background-image: url('../img/franklin.png');
+    background-repeat: no-repeat;
+}
+#h {
+    background-image: url('../img/patty.png');
+    background-repeat: no-repeat;
+}
+#s {
+    background-image: url('../img/schroeder.png');
+    background-repeat: no-repeat;
 }

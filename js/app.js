@@ -28,6 +28,7 @@ var stockEl = document.getElementById("stock");
 // tableau movement
 // tableauEl.addEventListener('dragenter', addTableau); //dragover? maybe?
 // wasteEl.addEventListener("click", selectWaste);
+stockEl.addEventListener("click", addWaste);
 // active play motion?
 // click to start deck & RESTART BUTTON
 
@@ -47,27 +48,44 @@ function init() {
     // displayActive(); // show active cards function?
 }
 
+function addWaste(){
+    if (!stock.length) {
+        stock = [...waste];
+        waste = [];
+        return
+    }
+    waste.push(stock.pop());
+    console.log(waste);
+}
+
+
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
         // build string of divs to set to section's innerHTML
         var html = '';
         tableau[tableauColIdx].forEach(function(card) {
-            html += `<div><img src="${card.isActive ? card.imgLink : 'img/REDBACK.png'}"></div>`;
+            html += `<div><img src="${card.isActive ? card.imgLink : 'img/BLUEBACK.png'}"></div>`;
         });
         section.innerHTML = html;
     });
-    foundationPiles.forEach(function(div,foundationPileIdx) {
-        var html = '';
-        foundation[foundationPileIdx].forEach(function(card) {
-            html += `<img src="${card.isActive ? card.imgLink : 'img/franklin.png'}">`; // do I want card in here at all?
-        });
-        div.innerHTML = html;
-    });
+    foundationPiles.forEach( function(arr, i){
+        if(!arr.length){
+            foundationPiles[i].setAttribute("style",`background-image: url('img/${i}.png');`);
+        } // This is to be changed when the functionality of clicking is enabled.
+    })
     if (!stock.length) {
-        stockEl.setAttribute("style","background-color: white;");
+        stockEl.setAttribute("style","background-image:url('img/refresh.png');");
     } else {
-        stockEl.setAttribute("style","background-image:url('img/REDBACK.png');");
+        stockEl.setAttribute("style","background-image:url('img/BLUEBACK.png');");
     }
+    if (!waste.length) {
+        wasteEl.setAttribute("style", "background-image: none;");
+    } else {
+        wasteEl.setAttribute("style",`background-image:url(${this.imgLink});`)
+        console.log();
+    }
+    
+    
     // wasteEl.forEach(function(,){
 
     // })
@@ -86,7 +104,7 @@ class Card {
         this.rank = rank;
         this.isActive = false;
         this.selected = false;
-        this.imgLink = (`../img/${this.suit}${this.rank}.png`)
+        this.imgLink = (`img/${this.suit}${this.rank}.png`)
     }
 }
 function shuffleDeck() {
@@ -121,6 +139,7 @@ function checkWin() {
     if (foundation[0].length + foundation[1].length + foundation[2].length + foundation[3].length === 52)
     /*{DO SOMETHING ON THE BOARD}*/;
 }
+
 
 // USE THIS AS A RESET MODEL
 
