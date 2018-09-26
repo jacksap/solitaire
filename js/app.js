@@ -13,6 +13,7 @@ var stock;
 var waste;
 var tableauSections;
 
+
 /*----- cached element references -----*/
 
 // This is the cached area to reference the items called on in the DOM
@@ -48,15 +49,24 @@ function init() {
     // displayActive(); // show active cards function?
 }
 
-function addWaste(){
+function addWaste() {
     if (!stock.length) {
         stock = [...waste];
         waste = [];
         return
     }
     waste.push(stock.pop());
+    displayAvailableWaste();
     console.log(waste);
+    settingStockWaste();
 }
+
+function displayAvailableWaste() {
+    var lastWaste = waste[waste.length - 1];
+    lastWaste.isActive = true;
+}
+
+
 
 
 function render() {
@@ -73,6 +83,10 @@ function render() {
             foundationPiles[i].setAttribute("style",`background-image: url('img/${i}.png');`);
         } // This is to be changed when the functionality of clicking is enabled.
     })
+    settingStockWaste();
+    checkWin();
+}
+function settingStockWaste(){
     if (!stock.length) {
         stockEl.setAttribute("style","background-image:url('img/refresh.png');");
     } else {
@@ -80,11 +94,11 @@ function render() {
     }
     if (!waste.length) {
         wasteEl.setAttribute("style", "background-image: none;");
-    } else {
-        wasteEl.setAttribute("style",`background-image:url(${this.imgLink});`)
-        console.log();
+    } else if (waste.length) {
+        var lastWaste = waste[waste.length - 1];
+        wasteEl.setAttribute("style",`background-image:url('${lastWaste.imgLink}');`)
     }
-    
+} 
     
     // wasteEl.forEach(function(,){
 
@@ -93,8 +107,7 @@ function render() {
 
 
 
-    checkWin();
-}
+    
 
 // Keep in mind the function above will handle other data.
 

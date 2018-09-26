@@ -99,6 +99,7 @@ button {
     box-sizing: content-box;
     position: relative;
     left: 7%;
+    background-repeat: no-repeat;
 }
 
 #d {
