@@ -50,7 +50,7 @@ function init() {
 }
 
 function addWaste() {
-    if (!stock.length) {
+    if (!stock.length) { //issue with image and order - talk to Jim
         stock = [...waste];
         waste = [];
         return
@@ -65,9 +65,6 @@ function displayAvailableWaste() {
     var lastWaste = waste[waste.length - 1];
     lastWaste.isActive = true;
 }
-
-
-
 
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
@@ -99,15 +96,6 @@ function settingStockWaste(){
         wasteEl.setAttribute("style",`background-image:url('${lastWaste.imgLink}');`)
     }
 } 
-    
-    // wasteEl.forEach(function(,){
-
-    // })
-
-
-
-
-    
 
 // Keep in mind the function above will handle other data.
 
@@ -154,7 +142,6 @@ function checkWin() {
 }
 
 
-// USE THIS AS A RESET MODEL
 
 // function reset(event) {
 //     Card.isActive = false;
@@ -187,34 +174,4 @@ init();
 
 
 
-// Start Game
 
-// Create storage of cards (shuffle)
-   // How are they organized?
-// Create shuffle loop
-
-// DEAL DECK    
-    // Distribute cards in columns and the rest goes into deal deck
-        // Last card/stack facing up
-        // These may be individual arrays/switch images accordingly. 
-
-// Event listeners for user interactions
-    // Click/Drag cards to responsive locations
-        // This will require outlining which cards are compatible order wise and opening the return stack decks (A,S,C,D)
-    // Alternating colors in descending order. Unlike ASCD chronological and suit based. 
-        // RED/BLACK + KQJ10...
-        // SUIT + A234...
-    // User can click through deal deck for new card options that can then be put in play. 
-        // If removed items must stay in order (.splice)
-        // Stack of deal cards should have a refresh functionality at the end
-    // These should be repeatable functions (loop)
-
-    // Differentiate between VALID and INVALID moves
-
-//Game over
-    // User has unloaded all items into suit stacks - win
-    // Forfeit because there are no moves left
-    // Reset burton 
-
-
-// How do transition cards and create valid input areas?
