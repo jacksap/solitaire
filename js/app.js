@@ -6,32 +6,27 @@ const CARDBACK = `path`
 
 /*----- app's state (variables) -----*/
 var deck; 
-var tableau; // 7 distribution columns
-var foundation; // The unloading decks
+var tableau; 
+var foundation; 
 
 var stock;
 var waste;
 var tableauSections;
+var selectedCards;
 var cardsToTurn;
 
 /*----- cached element references -----*/
-
-// This is the cached area to reference the items called on in the DOM
 
 var tableauCols = document.querySelectorAll("#tableau section");
 var foundationPiles = document.querySelectorAll("#foundation div");
 var wasteEl = document.getElementById("waste"); 
 var stockEl = document.getElementById("stock"); 
+var tableauEl = document.getElementById('tableau');
 
 /*----- event listeners -----*/
 
-// waste/stock event listeners
-// tableau movement
-// tableauEl.addEventListener('dragenter', addTableau); //dragover? maybe?
-// wasteEl.addEventListener("click", selectWaste);
+tableauEl.addEventListener("click", addTableau);
 stockEl.addEventListener("click", addWaste);
-// active play motion?
-// click to start deck & RESTART BUTTON
 
 /*----- functions -----*/
 
@@ -41,17 +36,15 @@ function init() {
     stock = [];
     tableau = [[], [], [], [], [], [], []];
     foundation = [[], [], [], []];
-    createDeck(); // function making the card array correspond with the images
-    shuffleDeck(); // function to shuffle deck
-    deal(); // Can this put the remainder of stock into the stock pile? Element?
+    selectedCards = [];
+    createDeck(); 
+    shuffleDeck();
+    deal(); 
     cardsToTurn = stock.length -1;
     render();
     renderStockWaste(true); 
-    // render will invoke the state of the game
     // displayActive(); // show active cards function?
 }
-
-
 
 function addWaste() {
     cardsToTurn--;
@@ -60,40 +53,26 @@ function addWaste() {
     if (!cardsToTurn) cardsToTurn = stock.length -1;
 }
 
-
-// function addTableau() {
-//     if (activeCard.length) {
-//         var tableauTarget = tableau[target.id.charAt(0)];
-//         if (activeCard[0].rank === 13 && tableauTarget.length === 0) {
-//             white (activeCard.length > 0) {
-//                 tableauTarget.push(activeCard.shift());
-//             }
-//         } else {
-//             var checkRank = activeCard[0].rank + 1 === tableauTarget[tableauTarget.length - 1].rank;
-//             var checkSuit = suit.indexOf(tableauTarget[tableauTarget.length - 1].suit) %2;
-//             if (checkRank && checkSuit) {
-//                 console.log (checkRank, checkSuit)
-//                 while (activeCard.length > 0) {
-//                     tableauTarget.push(activeCard.shift());
-//                 }
-//             } else {
-//                 console.log("Can't append to this column.")
-//             }
-//         }
-//         render();
-//         // CREATE A FUNCTION TO DISPLAY ACTIVE CARDS
-//     }
-// }
-
-
-
-
-
-
+function addTableau(e) {
+    var tableauTarget = tableau[event.target.parentNode.parentNode.id.charAt(0)];
+    console.log(tableauTarget);
+    // if (selectedCards.length) {
+    //     selectedCards.forEach(function(Card){
+    //         Card.push(tableauTarget.pop());
+    //     });
+    
+    //     //move selected cards
+    //     //to the clicked
+    //     //[] in tableau
+    // } else {
+    //     if(!Card.isActive) return;
+    //     
+    //     });
+    // }
+}
 
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
-        // build string of divs to set to section's innerHTML
         var html = '';
         tableau[tableauColIdx].forEach(function(card) {
             html += `<div ${card.selected ? 'class="selected"' : "" }><img src="${card.isActive ? card.imgLink : 'img/BLUEBACK.png'}"></div>`;
@@ -103,7 +82,7 @@ function render() {
     foundationPiles.forEach( function(arr, i){
         if(!arr.length){
             foundationPiles[i].setAttribute("style",`background-image: url('img/${i}.png');`);
-        } // This is to be changed when the functionality of clicking is enabled.
+        } 
     })
     checkWin();
 }
@@ -116,8 +95,6 @@ function renderStockWaste(firstClick){
         wasteEl.setAttribute("style", "background-image: none;");
     }
 } 
-
-// Keep in mind the function above will handle other data.
 
 class Card {
     constructor(suit, rank) {
@@ -154,14 +131,14 @@ function createDeck () {
     }
 }
 
-
-
 function checkWin() {
     if (foundation[0].length + foundation[1].length + foundation[2].length + foundation[3].length === 52)
     /*{DO SOMETHING ON THE BOARD}*/;
 }
 
+init();
 
+// columns should be constructors and loading decks are in arrays
 
 // function reset(event) {
 //     Card.isActive = false;
@@ -172,26 +149,3 @@ function checkWin() {
 //         init();
 //     }
 // }
-
-// function addWaste(e) {
-//     if (!activeCard.length) {
-//       if (stock.length === 0) {
-//         stock = stock.concat(waste.reverse());
-//         waste = [];
-//       } else {
-//         waste = waste.concat(stock.splice(stock.length - 3).reverse());
-//       }
-//     }
-//     displayActive(e);
-//     render();
-//   }
-
-init();
-
-
-// columns should be constructors and loading decks are in arrays
-
-
-
-
-

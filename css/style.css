@@ -16,6 +16,7 @@ body {
     min-width: 100px;
     min-height: 140px;
     border: 1px dashed salmon;
+    padding: 0 10px;
 }
 
 .tableau {
@@ -101,24 +102,21 @@ button {
     position: fixed;
     /* box-sizing: border-box; */
     position: relative;
-    left: 7%;
+    left: 8%;
     background-repeat: no-repeat;
 }
 
 #d {
-    background-image: url('../img/lucy.png');
     background-repeat: no-repeat;
 }
 #c {
-    background-image: url('../img/franklin.png');
     background-repeat: no-repeat;
 }
 #h {
-    background-image: url('../img/patty.png');
     background-repeat: no-repeat;
 }
 #s {
-    background-image: url('../img/schroeder.png');
+    
     background-repeat: no-repeat;
 }
 
