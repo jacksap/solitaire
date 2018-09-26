@@ -1,3 +1,6 @@
+* {
+    box-sizing: border-box;
+}
 body {
     background-image: url(../img/moonpumpkin.jpg);
     background-size: cover;
@@ -85,7 +88,7 @@ button {
     border: 1px dashed limegreen;
     display: inline-flex;
     position: fixed;
-    box-sizing: content-box;
+    /* box-sizing: border-box; */
     background-repeat: no-repeat;
     position: relative;
     left: 8%;
@@ -96,7 +99,7 @@ button {
     border: 1px dashed magenta;
     display: inline-flex;
     position: fixed;
-    box-sizing: content-box;
+    /* box-sizing: border-box; */
     position: relative;
     left: 7%;
     background-repeat: no-repeat;
@@ -117,4 +120,8 @@ button {
 #s {
     background-image: url('../img/schroeder.png');
     background-repeat: no-repeat;
+}
+
+.selected {
+    border-bottom: 3px dashed yellow; 
 }

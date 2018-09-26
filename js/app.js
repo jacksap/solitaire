@@ -12,7 +12,7 @@ var foundation; // The unloading decks
 var stock;
 var waste;
 var tableauSections;
-
+var cardsToTurn;
 
 /*----- cached element references -----*/
 
@@ -39,39 +39,64 @@ function init() {
     deck = [];
     activeCard = []; // this is where the active card in play is stored
     stock = [];
-    waste = [];
     tableau = [[], [], [], [], [], [], []];
     foundation = [[], [], [], []];
     createDeck(); // function making the card array correspond with the images
     shuffleDeck(); // function to shuffle deck
     deal(); // Can this put the remainder of stock into the stock pile? Element?
-    render(); // render will invoke the state of the game
+    cardsToTurn = stock.length -1;
+    render();
+    renderStockWaste(true); 
+    // render will invoke the state of the game
     // displayActive(); // show active cards function?
 }
 
+
+
 function addWaste() {
-    if (!stock.length) { //issue with image and order - talk to Jim
-        stock = [...waste];
-        waste = [];
-        return
-    }
-    waste.push(stock.pop());
-    displayAvailableWaste();
-    console.log(waste);
-    settingStockWaste();
+    cardsToTurn--;
+    stock.push(stock.shift());
+    renderStockWaste();
+    if (!cardsToTurn) cardsToTurn = stock.length -1;
 }
 
-function displayAvailableWaste() {
-    var lastWaste = waste[waste.length - 1];
-    lastWaste.isActive = true;
-}
+
+// function addTableau() {
+//     if (activeCard.length) {
+//         var tableauTarget = tableau[target.id.charAt(0)];
+//         if (activeCard[0].rank === 13 && tableauTarget.length === 0) {
+//             white (activeCard.length > 0) {
+//                 tableauTarget.push(activeCard.shift());
+//             }
+//         } else {
+//             var checkRank = activeCard[0].rank + 1 === tableauTarget[tableauTarget.length - 1].rank;
+//             var checkSuit = suit.indexOf(tableauTarget[tableauTarget.length - 1].suit) %2;
+//             if (checkRank && checkSuit) {
+//                 console.log (checkRank, checkSuit)
+//                 while (activeCard.length > 0) {
+//                     tableauTarget.push(activeCard.shift());
+//                 }
+//             } else {
+//                 console.log("Can't append to this column.")
+//             }
+//         }
+//         render();
+//         // CREATE A FUNCTION TO DISPLAY ACTIVE CARDS
+//     }
+// }
+
+
+
+
+
+
 
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
         // build string of divs to set to section's innerHTML
         var html = '';
         tableau[tableauColIdx].forEach(function(card) {
-            html += `<div><img src="${card.isActive ? card.imgLink : 'img/BLUEBACK.png'}"></div>`;
+            html += `<div ${card.selected ? 'class="selected"' : "" }><img src="${card.isActive ? card.imgLink : 'img/BLUEBACK.png'}"></div>`;
         });
         section.innerHTML = html;
     });
@@ -80,20 +105,15 @@ function render() {
             foundationPiles[i].setAttribute("style",`background-image: url('img/${i}.png');`);
         } // This is to be changed when the functionality of clicking is enabled.
     })
-    settingStockWaste();
     checkWin();
 }
-function settingStockWaste(){
-    if (!stock.length) {
-        stockEl.setAttribute("style","background-image:url('img/refresh.png');");
-    } else {
+function renderStockWaste(firstClick){
+    if (cardsToTurn) {
         stockEl.setAttribute("style","background-image:url('img/BLUEBACK.png');");
-    }
-    if (!waste.length) {
+        if (!firstClick) wasteEl.setAttribute("style",`background-image:url('${stock[0].imgLink}');`)   
+    } else {
+        stockEl.setAttribute("style","background-image:url('img/refresh.png');");
         wasteEl.setAttribute("style", "background-image: none;");
-    } else if (waste.length) {
-        var lastWaste = waste[waste.length - 1];
-        wasteEl.setAttribute("style",`background-image:url('${lastWaste.imgLink}');`)
     }
 } 
 
