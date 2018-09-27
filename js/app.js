@@ -84,7 +84,7 @@ function handleColumnClick() {
 }
 
 // function buildFoundation() {
-//     if (selectedCards.length = 1) {
+//      if (selectedCards.length = 1) {
 
 //     foundationPiles[i] = foundationPiles[i].concat(selectedCards);
 //     } else {
