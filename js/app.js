@@ -28,6 +28,7 @@ var stockEl = document.getElementById("stock");
 var tableauEl = document.getElementById('tableau');
 var resetBtn = document.querySelector('button');
 var foundationEl = document.getElementById('foundation');
+var pumpkinBoard = document.getElementById('woodstock');
 
 /*----- event listeners -----*/
 
@@ -75,7 +76,7 @@ function handleColumnClick() {
             });
         }
     } else {
-    if(!tableau[colIdx][rowIdx].isActive) return;
+    if(!tableau[colIdx][rowIdx].isActive) return; // AND NO OTHER BELOW IT ... click to make it active?
         staticColIdx = parseInt(event.target.id.charAt(1));
         staticRowIdx = parseInt(event.target.id.charAt(3));
         selectedCards = tableau[colIdx].slice(rowIdx);
@@ -163,8 +164,9 @@ function createDeck () {
 }
 
 function checkWin() {
-    if (foundation[0].length + foundation[1].length + foundation[2].length + foundation[3].length === 52)
-    /*{DO SOMETHING ON THE BOARD}*/;
+    if (foundation[0].length + foundation[1].length + foundation[2].length + foundation[3].length === 52){
+        woodstock.setAttribute("style", "background-image: none;") // this is where I will insert the visibility function ! 
+    };
 }
 
 

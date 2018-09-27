@@ -8,15 +8,15 @@ body {
 }
 
 #foundation {
-    display:flex;
+    display: flex;
     position: relative;
-    left: 15%;
+    left: 18%;
 }
 #foundation div {
-    min-width: 100px;
+    min-width: 110px;
     min-height: 140px;
-    border: 1px dashed salmon;
-    padding: 0 10px;
+    padding: 5px;
+    background-repeat: no-repeat;
 }
 
 .tableau {
@@ -33,12 +33,57 @@ body {
 #tableau section {
     min-width: 100px;
     min-height: 140px;
-    border: 1px dashed red;
+    max-height: 470px;
+    padding: 5px;
 }
 
-#tableau section div::after{
+#tableau section div:nth-child(2){
     position: relative;
-    top: -80px;
+    bottom: 110px;
+}
+#tableau section div:nth-child(3){
+    position: relative;
+    bottom: 220px;
+}
+#tableau section div:nth-child(4){
+    position: relative;
+    bottom: 330px;
+}
+#tableau section div:nth-child(5){
+    position: relative;
+    bottom: 440px;
+}
+#tableau section div:nth-child(6){
+    position: relative;
+    bottom: 550px;
+}
+#tableau section div:nth-child(7){
+    position: relative;
+    bottom: 660px;
+}
+#tableau section div:nth-child(8){
+    position: relative;
+    bottom: 770px;
+}
+#tableau section div:nth-child(9){
+    position: relative;
+    bottom: 880px;
+}
+#tableau section div:nth-child(10){
+    position: relative;
+    bottom: 990px;
+}
+#tableau section div:nth-child(11){
+    position: relative;
+    bottom: 1100px;
+}
+#tableau section div:nth-child(12){
+    position: relative;
+    bottom: 1210px;
+}
+#tableau section div:nth-child(13){
+    position: relative;
+    bottom: 1320px;
 }
 
 #foundation {
@@ -48,7 +93,7 @@ body {
 
 #stock, #waste, #foundation {
     position: relative;
-    top: 12px;
+    top: 5px;
     padding: 0 10px;
 }
 
@@ -64,8 +109,8 @@ body {
     padding: 15px;
     margin: auto;
     position: absolute;
-    right: 185px;
-    bottom: 40px;
+    left: 19px;
+    bottom: 60px;
 }
 button {
     margin: auto;
@@ -82,7 +127,7 @@ button {
 }
 .loadingrow {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     background: none;
     margin: 0;
     min-height: 140px;
