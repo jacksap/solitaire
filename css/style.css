@@ -95,14 +95,14 @@ button {
     left: 8%;
 }
 #waste {
-    min-width: 100px;
+    min-width: 110px;
     min-height: 140px;
     border: 1px dashed magenta;
     display: inline-flex;
     position: fixed;
     /* box-sizing: border-box; */
     position: relative;
-    left: 8%;
+    left: 9%;
     background-repeat: no-repeat;
 }
 

@@ -15,6 +15,9 @@ var tableauSections;
 var selectedCards;
 var cardsToTurn;
 
+var staticColIdx; 
+var staticRowIdx; 
+
 /*----- cached element references -----*/
 
 var tableauCols = document.querySelectorAll("#tableau section");
@@ -22,12 +25,14 @@ var foundationPiles = document.querySelectorAll("#foundation div");
 var wasteEl = document.getElementById("waste"); 
 var stockEl = document.getElementById("stock"); 
 var tableauEl = document.getElementById('tableau');
+var resetBtn = document.querySelector('button');
+// var foundationEl = document.getElementById('foundation');
 
 /*----- event listeners -----*/
-
-tableauEl.addEventListener("click", addTableau);
+// foundationEl.addEventListener("click", buildFoundation);
+tableauEl.addEventListener("click", handleColumnClick);
 stockEl.addEventListener("click", addWaste);
-
+resetBtn.addEventListener("click", reset);
 /*----- functions -----*/
 
 function init() {
@@ -53,29 +58,46 @@ function addWaste() {
     if (!cardsToTurn) cardsToTurn = stock.length -1;
 }
 
-function addTableau(e) {
-    var tableauTarget = tableau[event.target.parentNode.parentNode.id.charAt(0)];
-    console.log(tableauTarget);
-    // if (selectedCards.length) {
-    //     selectedCards.forEach(function(Card){
-    //         Card.push(tableauTarget.pop());
-    //     });
+function handleColumnClick() {
+    var colIdx = parseInt(event.target.id.charAt(1));
+    var rowIdx = parseInt(event.target.id.charAt(3));
     
-    //     //move selected cards
-    //     //to the clicked
-    //     //[] in tableau
-    // } else {
-    //     if(!Card.isActive) return;
-    //     
-    //     });
-    // }
+    if (selectedCards.length) {
+        tableau[colIdx] = tableau[colIdx].concat(selectedCards);
+        // call the build foundation
+        selectedCards = [];
+        tableau[staticColIdx].splice(staticRowIdx);
+        if (tableau[colIdx][rowIdx].isActive) {
+            tableau[colIdx].forEach(function(card){
+                card.selected = false;
+            });
+        }
+    } else {
+    if(!tableau[colIdx][rowIdx].isActive) return;
+        staticColIdx = parseInt(event.target.id.charAt(1));
+        staticRowIdx = parseInt(event.target.id.charAt(3));
+        selectedCards = tableau[colIdx].slice(rowIdx);
+        tableau[colIdx][rowIdx].selected = true;
+    };
+    console.log(selectedCards);
+    render();
 }
+
+// function buildFoundation() {
+//     if (selectedCards.length = 1) {
+
+//     foundationPiles[i] = foundationPiles[i].concat(selectedCards);
+//     } else {
+//     }
+//     check if it is active, return
+//     otherwise add it to the selectedCard[]
+
 
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
         var html = '';
-        tableau[tableauColIdx].forEach(function(card) {
-            html += `<div ${card.selected ? 'class="selected"' : "" }><img src="${card.isActive ? card.imgLink : 'img/BLUEBACK.png'}"></div>`;
+        tableau[tableauColIdx].forEach(function(card, rowIdx) {
+            html += `<div ${card.selected ? 'class="selected"' : "" }><img id="c${tableauColIdx}r${rowIdx}" src="${card.isActive ? card.imgLink : 'img/BLUEBACK.png'}"></div>`;
         });
         section.innerHTML = html;
     });
@@ -136,16 +158,13 @@ function checkWin() {
     /*{DO SOMETHING ON THE BOARD}*/;
 }
 
-init();
 
 // columns should be constructors and loading decks are in arrays
 
-// function reset(event) {
-//     Card.isActive = false;
-//     // How I will be stating that nothing is in play anymore. I really want to the init to be set off.
-//     AKA When the button is clicked, clear board again...
-//     for (let i = 0; i < colArray.length; i++) {
-//         colArray[i].src = "img/REDBACK.png"; // unclear if this will work, has to be built out.
-//         init();
-//     }
-// }
+function reset() {
+    init();
+}
+
+init();
+
+
