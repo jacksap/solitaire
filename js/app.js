@@ -5,6 +5,7 @@ const RANKS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
 const CARDBACK = `path`
 
 /*----- app's state (variables) -----*/
+
 var deck; 
 var tableau; 
 var foundation; 
@@ -26,13 +27,15 @@ var wasteEl = document.getElementById("waste");
 var stockEl = document.getElementById("stock"); 
 var tableauEl = document.getElementById('tableau');
 var resetBtn = document.querySelector('button');
-// var foundationEl = document.getElementById('foundation');
+var foundationEl = document.getElementById('foundation');
 
 /*----- event listeners -----*/
-// foundationEl.addEventListener("click", buildFoundation);
+
+foundationEl.addEventListener("click", buildFoundation);
 tableauEl.addEventListener("click", handleColumnClick);
 stockEl.addEventListener("click", addWaste);
 resetBtn.addEventListener("click", reset);
+
 /*----- functions -----*/
 
 function init() {
@@ -64,7 +67,6 @@ function handleColumnClick() {
     
     if (selectedCards.length) {
         tableau[colIdx] = tableau[colIdx].concat(selectedCards);
-        // call the build foundation
         selectedCards = [];
         tableau[staticColIdx].splice(staticRowIdx);
         if (tableau[colIdx][rowIdx].isActive) {
@@ -83,15 +85,20 @@ function handleColumnClick() {
     render();
 }
 
-// function buildFoundation() {
-//      if (selectedCards.length = 1) {
+// add flipping of the next card in the column array if accepted into the other array(static column row -1 make is active... show image link)
+// dont let it click on it's own column (may be a logic addition)
 
-//     foundationPiles[i] = foundationPiles[i].concat(selectedCards);
-//     } else {
-//     }
-//     check if it is active, return
-//     otherwise add it to the selectedCard[]
+// selectWaste that can then be moved into the selectedCards Array
+// stock[0]=stock[0].shift(tableau[colIdx].pop());
 
+function buildFoundation() {
+    if (selectedCards.length === 1) {
+    var correctFoundation = event.target.id.charAt(1)
+    foundation[correctFoundation].push(selectedCards.pop());
+    tableau[staticColIdx].splice(staticRowIdx);
+    render();
+    }
+}
 
 function render() {
     tableauCols.forEach(function(section, tableauColIdx) {
@@ -101,9 +108,11 @@ function render() {
         });
         section.innerHTML = html;
     });
-    foundationPiles.forEach( function(arr, i){
-        if(!arr.length){
+    foundationPiles.forEach( function(element, i){
+        if(!foundation[i].length){
             foundationPiles[i].setAttribute("style",`background-image: url('img/${i}.png');`);
+        } else {
+            foundationPiles[i].setAttribute("style", `background-image: url('${foundation[i][foundation[i].length - 1].imgLink}');`);
         } 
     })
     checkWin();

@@ -36,6 +36,11 @@ body {
     border: 1px dashed red;
 }
 
+#tableau section div::after{
+    position: relative;
+    top: -80px;
+}
+
 #foundation {
     padding: 0 18px;
     margin: auto;
@@ -123,3 +128,4 @@ button {
 .selected {
     border-bottom: 3px dashed yellow; 
 }
+
