@@ -1,4 +1,7 @@
 # Solitaire
+
+![Game Screenshot](Game Screenshot.png)
+
 <!-- A description of your game. Background info of the game is a nice touch. -->
 Solitaire is a popular card game...
 
