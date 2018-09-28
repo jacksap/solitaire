@@ -1,183 +1,150 @@
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 body {
-    background-image: url(../img/moonpumpkin.jpg);
-    background-size: cover;
-    background-attachment: fixed;
+	background-image: url(../img/moonpumpkin.jpg);
+	background-size: cover;
+	background-attachment: fixed;
 }
-
 #foundation {
-    display: flex;
-    position: relative;
-    left: 18%;
+	display: flex;
+	position: relative;
+	left: 18%;
 }
 #foundation div {
-    min-width: 110px;
-    min-height: 140px;
-    padding: 5px 5px 0 5px;
-    background-repeat: no-repeat;
+	min-width: 110px;
+	min-height: 140px;
+	padding: 5px 5px 0 5px;
+	background-repeat: no-repeat;
 }
-
 .tableau {
-    margin: auto;
-    width: 100vw;
+	margin: auto;
+	width: 100vw;
 }
 #tableau {
-    display: flex;
-    vertical-align: top;
-    margin: 20px 20px;
-    justify-content: center;
+	display: flex;
+	vertical-align: top;
+	margin: 20px 20px;
+	justify-content: center;
 }
-
 #tableau section {
-    min-width: 100px;
-    min-height: 140px;
-    max-height: 470px;
-    padding: 5px;
+	min-width: 100px;
+	min-height: 138px;
+	max-height: 470px;
+	margin: 5px;
+	padding-top: 5px;
+	border-top: 5px solid rgba(54, 66, 134, 0.5);
+	;
 }
-
-#tableau section div:nth-child(2){
-    position: relative;
-    bottom: 110px;
+#tableau section div:nth-child(2) {
+	position: relative;
+	bottom: 110px;
 }
-#tableau section div:nth-child(3){
-    position: relative;
-    bottom: 220px;
+#tableau section div:nth-child(3) {
+	position: relative;
+	bottom: 220px;
 }
-#tableau section div:nth-child(4){
-    position: relative;
-    bottom: 330px;
+#tableau section div:nth-child(4) {
+	position: relative;
+	bottom: 330px;
 }
-#tableau section div:nth-child(5){
-    position: relative;
-    bottom: 440px;
+#tableau section div:nth-child(5) {
+	position: relative;
+	bottom: 440px;
 }
-#tableau section div:nth-child(6){
-    position: relative;
-    bottom: 550px;
+#tableau section div:nth-child(6) {
+	position: relative;
+	bottom: 550px;
 }
-#tableau section div:nth-child(7){
-    position: relative;
-    bottom: 660px;
+#tableau section div:nth-child(7) {
+	position: relative;
+	bottom: 660px;
 }
-#tableau section div:nth-child(8){
-    position: relative;
-    bottom: 770px;
+#tableau section div:nth-child(8) {
+	position: relative;
+	bottom: 770px;
 }
-#tableau section div:nth-child(9){
-    position: relative;
-    bottom: 880px;
+#tableau section div:nth-child(9) {
+	position: relative;
+	bottom: 880px;
 }
-#tableau section div:nth-child(10){
-    position: relative;
-    bottom: 990px;
+#tableau section div:nth-child(10) {
+	position: relative;
+	bottom: 990px;
 }
-#tableau section div:nth-child(11){
-    position: relative;
-    bottom: 1100px;
+#tableau section div:nth-child(11) {
+	position: relative;
+	bottom: 1100px;
 }
-#tableau section div:nth-child(12){
-    position: relative;
-    bottom: 1210px;
+#tableau section div:nth-child(12) {
+	position: relative;
+	bottom: 1210px;
 }
-#tableau section div:nth-child(13){
-    position: relative;
-    bottom: 1320px;
+#tableau section div:nth-child(13) {
+	position: relative;
+	bottom: 1320px;
 }
-
 #foundation {
-    padding: 0 18px;
-    margin: auto;
+	padding: 0 18px;
+	margin: auto;
 }
-
 #stock, #waste, #foundation {
-    position: relative;
-    top: 5px;
-    padding: 0 10px;
+	position: relative;
+	top: 5px;
+	padding: 0 10px;
 }
-
 .peanuts {
-    padding: 2px;
-    margin: 0 20px 30px 18px;
-    position: absolute;
-    left: 02px;
-    bottom: 20px;
-}
-.woodstock {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: 'Gloria Hallelujah', cursive;
-    font-weight: bolder;
-    font-size: 21px;
-    background-image: url("../img/sign.png");
-    min-width: 250px;
-    min-height: 200px;
-    padding-right: 65px;
-    padding-bottom: 100px;
-    background-repeat: no-repeat;
-    position: absolute;
-    left: 27px;
-    bottom: 75px;
+	padding: 2px;
+	margin: 0 20px;
+	position: absolute;
+	left: 02px;
+	bottom: 2px;
 }
 button {
-    margin: auto;
-    padding: 1px;
-    font-weight: bold;
-    font-size: 1em;
-    width: 150px;
-    background-color: #ecf0a7;
-    border-color: black;
-    border-width: medium;
-    position: absolute;
-    right: 40px;
-    bottom: 40px;
+	margin: auto;
+	padding: 1px;
+	font-weight: bold;
+	font-size: 1em;
+	width: 150px;
+	background-color: #ecf0a7;
+	border-color: black;
+	border-width: medium;
+	position: absolute;
+	right: 40px;
+	bottom: 40px;
 }
 .loadingrow {
-    display: flex;
-    justify-content: center;
-    background: none;
-    margin: 0;
-    min-height: 140px;
-    min-width: 100px;
+	display: flex;
+	justify-content: center;
+	background: none;
+	margin: 0;
+	min-height: 140px;
+	min-width: 100px;
 }
 #stock {
-    min-width: 100px;
-    min-height: 140px;
-    display: inline-flex;
-    position: fixed;
-    /* box-sizing: border-box; */
-    background-repeat: no-repeat;
-    position: relative;
-    left: 8%;
+	min-width: 100px;
+	min-height: 140px;
+	display: inline-flex;
+	position: fixed;
+	/* box-sizing: border-box; */
+	background-repeat: no-repeat;
+	position: relative;
+	left: 8%;
 }
 #waste {
-    min-width: 100px;
-    min-height: 140px;
-    display: inline-flex;
-    position: fixed;
-    /* box-sizing: border-box; */
-    position: relative;
-    left: 9%;
-    background-repeat: no-repeat;
+	min-width: 100px;
+	min-height: 140px;
+	display: inline-flex;
+	position: fixed;
+	/* box-sizing: border-box; */
+	position: relative;
+	left: 9%;
+	background-repeat: no-repeat;
 }
-
-#d {
-    background-repeat: no-repeat;
+#d, #c, #h, #s {
+	background-repeat: no-repeat;
 }
-#c {
-    background-repeat: no-repeat;
-}
-#h {
-    background-repeat: no-repeat;
-}
-#s {
-    
-    background-repeat: no-repeat;
-}
-
 .selected {
-    box-shadow: 0 0 5px 5px #b54cae; 
+	height: 138px;
+	box-shadow: 0 0 5px 5px #b54cae;
 }
-
