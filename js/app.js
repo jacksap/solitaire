@@ -249,13 +249,16 @@ function descOrderCheck(card1, card2) {
 
 function checkWin() {
     if ((foundation[0].length + foundation[1].length + foundation[2].length + foundation[3].length) === 52){
-        woodstock.textContent = "YOU WON!" 
+        woodstock.textContent = "YOU WON!"; 
+        tableauEl.setAttribute("style","display: flex; background-image: url(img/win.gif); background-repeat: no-repeat; justify-content: center; margin: auto; width: 480px;");
     };
 }
 
 function reset() {
     init();
     wasteEl.setAttribute("style", "background-image: none;");
+    tableauEl.removeAttribute("style","display: flex; background-image: url(img/win.gif); background-repeat: no-repeat; justify-content: center; margin: auto; width: 480px;");
+    woodstock.textContent = ""; 
 }
 
 init();
