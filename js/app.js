@@ -100,7 +100,7 @@ function handleColumnClick() {
     } else {
         if(!tableau[colIdx][rowIdx].isActive) return; // AND NO OTHER BELOW IT ... click to make it active?
         staticColIdx = parseInt(event.target.id.charAt(1));
-        staticRowIdx = parseInt(event.target.id.charAt(3));
+        staticRowIdx = parseInt(event.target.id.substr(3));
         selectedCards = tableau[colIdx].slice(rowIdx);
         tableau[colIdx][rowIdx].selected = true;
     };
@@ -132,7 +132,7 @@ function buildFoundation() {
                 renderStockWaste();
             } else {
                 tableau[staticColIdx].splice(staticRowIdx);
-                var lastCardIdx = tableau[staticColIdx].length - 1;
+                var lastCardIdx = tableau[staticColIdx].length - 1; //
                 if (lastCardIdx > -1) tableau[staticColIdx][lastCardIdx].isActive = true;
             }
             foundation[correctFoundation].push(selectedCards.pop());
