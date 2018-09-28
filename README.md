@@ -15,30 +15,30 @@ This game was created with HTML, CSS, Javascript, and Adobe Photoshop.
 
 ## Getting Started
 
-The game is accessible on GitHub Pages and is acccessible through this [link](https://jacksap.github.io/solitaire). 
+The game is hosted on GitHub Pages and is acccessible through this [link](https://jacksap.github.io/solitaire). 
 
-As stated above, the object of the game is to empty all the cards from the tableau columns and the stock deck move them into the foundation piles.
+As stated above, the object of the game is to empty all the cards from the tableau columns/stock deck and move them into the foundation piles.
 
 ## Next Steps
 
 There are a couple of items I would like to address.
 
-Although using the modulus operator works for determining the alternating pattern, it leaves an open gap in the Foundation arrays. Essentially, any Red card can be stacked on top of one another rather than cards of a single suit.
+* Although using the modulus operator works for determining the alternating pattern, it leaves an open gap in the Foundation arrays. Essentially, any Red card can be stacked on top of one another rather than cards of a single suit.
 
-I think eventually manipulating the dragability of the items would be nice, especially if the stock/waste pile could be rendered in increments of 3.
+* I think eventually manipulating the dragability of the items would be nice, especially if the stock/waste pile could be rendered in increments of 3.
 
-Audio can be added along with other stylistic properties to elevate game play.
+* Audio can be added along with other stylistic properties to elevate game play.
 
-Although implementing the logic for a winning hand is more complex, eventually the User should be given the choice to access a WINNING DEAL mode.
+* Although implementing the logic for a winning hand is more complex, eventually the User should be given the choice to access a WINNING DEAL mode.
 
-The image on the bottom-left corner jumps and needs to be polished a bit.
+* The image on the bottom-left corner jumps and needs to be polished a bit.
 
-Lastly, I would like to make this a more responsive deisgn, surrently it is designed with a laptop display in mind.
+* Lastly, I would like to make this a more responsive deisgn, surrently it is designed with a laptop display in mind.
 
 
 ## Pseudocode
 
-Below is my pseudocode for the game, I decided to include this as an insight into my building logic and thought processes.
+Below is my high-level pseudocode for the game, I decided to include this as insight into my building logic and thought processes.
 
 
     // Start Game
