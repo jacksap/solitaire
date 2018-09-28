@@ -7,7 +7,7 @@ Solitaire is a popular single-player card game. The object of the game is to col
 
 There are several parameters and logistical hurdles regarding where a card can be placed.
 
-This popular past time is a simple and fun way to kill time.!
+This popular past time is a simple and fun way to kill time!
 
 ## Technologies Used
 
